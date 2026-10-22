@@ -91,7 +91,7 @@ def determine_winner(userHand, dealerHand):
     if dealerHand > 21 or userHand > dealerHand:
         print("You win!")
     elif userHand == dealerHand:
-        print("Tie.")
+        print("Tie :/ ")
     else:
         print("You lose!")
     
