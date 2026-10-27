@@ -34,7 +34,7 @@ def twenty1_checker(hand):
 
     Returns:
         True(bool): Hand is at 21
-        False(bool): Hand is not at 21 
+        False(bool): Hand is not at 21
     """
     if hand == 21:
         return True
@@ -100,25 +100,41 @@ def determine_winner(userHand, dealerHand):
 
 def system():
     """User can start gambling for FREE if correct input is given
+
+        user has credit system, C is for credits for the sake of prototyping 
     
     Raises:
         SystemExit: If user's or dealer's opening hand is 21
     """
-    startGame = input("Welcome! Ready to play\n Insert Y|y to play: ")
-    if startGame == "y" or startGame == "Y": 
-            userHand = starting_hand()
-            print(f"Your hand: {userHand}")
-            if twenty1_checker(userHand):
-                print("You Win!")
-                exit(0)
+  
+    credit = 0
+    while True:
+        if credit == 0: 
+            userInput = input("Please insert credit to play! (C): ")
+            if userInput in ("C","c"): 
+                credit += 1
+                creditInput = input("Credit Added, add another? \n Y/y:")
+                if creditInput in ("Y","y"):
+                    credit += 1
+                    continue 
+                else:
+                    continue 
+        elif credit >= 1:        
+            startGame = input("Welcome! Ready to play\n Insert Y|y to play: ")
+            if startGame == "y" or startGame == "Y": 
+                    userHand = starting_hand()
+                    print(f"Your hand: {userHand}")
+                    if twenty1_checker(userHand):
+                        print("You Win!")
+                        exit(0)
 
-            dealerHand = starting_hand()
-            print(f"Dealer's hand: {dealerHand}")
-            if twenty1_checker(dealerHand):
-                print("You lose!")
-                exit(0)
+                    dealerHand = starting_hand()
+                    print(f"Dealer's hand: {dealerHand}")
+                    if twenty1_checker(dealerHand):
+                        print("You lose!")
+                        exit(0)
 
-            determine_winner(userHand, dealerHand)
+                    determine_winner(userHand, dealerHand)
 
 
 if __name__ == "__main__":
